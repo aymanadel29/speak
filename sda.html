@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <button id="speak">Type to Speak</button>
+        <p id="textarea"></p>
+    </div>
+
+    <script>
+        var speak = document.getElementById('speak');
+        var textarea = document.getElementById('textarea');
+        var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        var recognition = new SpeechRecognition();
+
+        speak.addEventListener('click', function () {
+            recognition.start();
+            textarea.innerHTML = '...speaking';
+        })
+        recognition.onresult = function (e) {
+            var transcript = e.results[0][0].transcript;
+            textarea.innerHTML = transcript.toUpperCase();
+
+            if(transcript.toUpperCase() == "OPEN."){
+                location.replace('http://blynk-cloud.com/yM0iu0t-6Grnb2Q5fvdXW9OxcEZ9uoec/update/V13?value=1')
+            }else if (transcript.toUpperCase() =="CLOSE")
+            {
+                location.replace('http://blynk-cloud.com/yM0iu0t-6Grnb2Q5fvdXW9OxcEZ9uoec/update/V13?value=0')
+            }
+        }
+    </script>
+</body>
+</html>
